@@ -10,6 +10,7 @@
 - MySql(connection using mysql-connector-8)
 - Hibernate(for automatic database management, JPA implementation and OR mapping)
 - Tomcat 8(act as container for server back-end)
+- Ajax(for reactive data transfer between front-end and back-end. Imported as Jquery)
 
 ## IDE
 

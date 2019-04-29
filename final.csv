@@ -1,0 +1,10 @@
+book_id,author,book_name,category,inventory,isbn,language,price,sales,summary
+1,God,"How to be a God",Non-fiction,99,1234567891,English,10.1,1000,"If you want to be a God, Read this"
+2,"JK Rowling","Harry Potter: Prisoner of Askaban",Fiction,100,1234567892,English,12.1,2000,"Harry Potter is The Boy Who Lived, singled out by Lord Voldemort at birth to be his greatest rival, and our hero."
+3,My,"Web Technologies",Computer,1000,1234567893,Malay,99.99,3000,"The World Wide Web, commonly known as the Web, is an information space where documents and other web resources are identified by Uniform Resource Locators, which may be interlinked by hypertext, and are accessible over the Internet"
+4,Ahmad,"How to become Terrosist",Terrorism,998,1234567894,Arabic,49.99,99,"Terrorism is an act of nobel"
+5,My,"Computer Vision in 2019",Computer,12,1234567895,English,200.15,0,"Simple description of ICS"
+6,Yuri,"Secret of Reproduction","Life Science",13,1234567896,Chinese,66.3,1,"Reproduction is the biological process by which new individual organisms"
+7,Unknown,"Hello World",Computer,99,1234567897,Albanian,50,13,"Hello World, Hello Web Homework"
+8,"Mr. Nobody","How I Met Myself",Fiction,98,1234567898,Chinese,10,208,"This is a real book, I just forgot the content"
+9,"Cheng Hao Peng",Tomcat,Computer,10000,1234567899,Arabic,0.1,999,"Please reduce our workload. We are very tired"
