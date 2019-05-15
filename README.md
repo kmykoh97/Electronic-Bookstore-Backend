@@ -1,6 +1,6 @@
 # Electronic-Bookstore-Backend
 
-## This is a project to write backend for bookstore application using popular Java Spring Framework.
+This is a project to write backend for bookstore application using popular Java Spring Framework.
 
 ## Technology Stack
 
