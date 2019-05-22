@@ -1,7 +1,9 @@
 package SJTU.eBook.Service;
 
 
-import SJTU.eBook.Database.*;
+import SJTU.eBook.DAO.AdminProcess;
+import SJTU.eBook.Entity.*;
+import SJTU.eBook.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RestController;

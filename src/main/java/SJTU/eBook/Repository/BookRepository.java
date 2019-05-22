@@ -1,5 +1,6 @@
-package SJTU.eBook.Database;
+package SJTU.eBook.Repository;
 
+import SJTU.eBook.Entity.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

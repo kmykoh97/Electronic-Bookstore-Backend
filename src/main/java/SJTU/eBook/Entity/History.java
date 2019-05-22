@@ -1,4 +1,4 @@
-package SJTU.eBook.Database;
+package SJTU.eBook.Entity;;
 
 import javax.persistence.*;
 

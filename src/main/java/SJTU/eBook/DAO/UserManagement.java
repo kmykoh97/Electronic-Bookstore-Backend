@@ -1,4 +1,4 @@
-package SJTU.eBook.Service;
+package SJTU.eBook.DAO;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
