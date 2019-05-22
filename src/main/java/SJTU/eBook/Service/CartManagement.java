@@ -1,7 +1,6 @@
 package SJTU.eBook.Service;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import javax.servlet.http.HttpSession;
 
 public interface CartManagement {

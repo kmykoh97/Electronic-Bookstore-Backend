@@ -5,18 +5,15 @@ import SJTU.eBook.Database.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.servlet.http.HttpSession;
-
 
 @RestController
 @SpringBootApplication
-public class UserManagementImpl implements UserManagement{
+public class UserManagementImpl implements UserManagement {
     @Autowired
     UserRepository customerRepository;
 
-
-    public String checkSession(HttpSession httpSession){
+    public String checkSession(HttpSession httpSession) {
         String message = "No info received";
         if(httpSession.getAttribute("user")!=null)
             return "Succeed";
@@ -25,20 +22,17 @@ public class UserManagementImpl implements UserManagement{
         }
     }
 
-
     public void logout(HttpSession httpSession){
         httpSession.setAttribute("user",null);
     }
 
-
-
-    public String checkLogin(String usn, String psw, HttpSession httpSession){
+    public String checkLogin(String usn, String psw, HttpSession httpSession) {
         User customer = customerRepository.getCustomerByUsername(usn);
         if(customer==null){
             return "Unknown user";
         }
-        else if (customer.getPassword().equals(psw)){
-            if (customer.getIs_valid() == 0){
+        else if (customer.getPassword().equals(psw)) {
+            if (customer.getIs_valid() == 0) {
                 return "Blocked user";
             }
             httpSession.setAttribute("user", usn);
@@ -48,8 +42,6 @@ public class UserManagementImpl implements UserManagement{
             return "Failure";
         }
     }
-
-
 
     public String getInfo(HttpSession httpSession){
         Object user = httpSession.getAttribute("user");
@@ -66,7 +58,6 @@ public class UserManagementImpl implements UserManagement{
         }
     }
 
-
     public String updateProfile(HttpSession httpSession, String phone, String email, String name, String address){
         Object user = httpSession.getAttribute("user");
         if(user==null)
@@ -81,7 +72,6 @@ public class UserManagementImpl implements UserManagement{
         customerRepository.save(customer);
         return "Succeed";
     }
-
 
     public String signUp(HttpSession httpSession, String username, String password,
                          String phone, String email,  String address, String realname)
@@ -101,5 +91,4 @@ public class UserManagementImpl implements UserManagement{
         httpSession.setAttribute("user", username);
         return "Succeed";
     }
-
 }

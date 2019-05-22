@@ -9,29 +9,25 @@ import javax.servlet.http.HttpSession;
 
 import java.util.List;
 
-
 @RestController
 @SpringBootApplication
 public class AdminProcessImpl implements AdminProcess {
     @Autowired
-    UserRepository customerRepository;
+    UserRepository userRepository;
 
     @Autowired
     BookRepository bookRepository;
 
     @Autowired
-    OrderRepository orderFormRepository;
+    HistoryRepository historyRepository;
 
     @Autowired
-    IndentRepository indentRepository;
-
-    @Autowired
-    IndentItemsRepository indentItemsRepository;
+    HistoryItemsRepository historyItemsRepository;
 
 
     public String adminGetBook(HttpSession httpSession){
         Object user = httpSession.getAttribute("user");
-        if(user==null || customerRepository.getCustomerByUsername(user.toString()).getIsAdmin()==0){
+        if(user==null || userRepository.getCustomerByUsername(user.toString()).getIsAdmin()==0){
             return "Not admin";
         }
         List<Book> bookList = bookRepository.getAll();
@@ -54,7 +50,6 @@ public class AdminProcessImpl implements AdminProcess {
         return buf.toString();
     }
 
-
     public String modifyBook(HttpSession httpSession,
                              int book_id, String name,
                              String author, String summary,
@@ -63,7 +58,7 @@ public class AdminProcessImpl implements AdminProcess {
     {
         try {
             Object user = httpSession.getAttribute("user");
-            if(user==null || customerRepository.getCustomerByUsername(user.toString()).getIsAdmin()==0){
+            if(user==null || userRepository.getCustomerByUsername(user.toString()).getIsAdmin()==0){
                 return "Not admin";
             }
             if(inventory<0 || price<=0){
@@ -88,12 +83,11 @@ public class AdminProcessImpl implements AdminProcess {
         }
     }
 
-
     public String modifyBook(HttpSession httpSession, int book_id)
     {
         try {
             Object user = httpSession.getAttribute("user");
-            if(user==null || customerRepository.getCustomerByUsername(user.toString()).getIsAdmin()==0){
+            if(user==null || userRepository.getCustomerByUsername(user.toString()).getIsAdmin()==0){
                 return "Not admin";
             }
             Book book = bookRepository.getBookByBookId(book_id);
@@ -110,11 +104,11 @@ public class AdminProcessImpl implements AdminProcess {
 
     public String getUser(HttpSession httpSession){
         Object user = httpSession.getAttribute("user");
-        if(user==null || customerRepository.getCustomerByUsername(user.toString()).getIsAdmin()==0){
+        if(user==null || userRepository.getCustomerByUsername(user.toString()).getIsAdmin()==0){
             return "Not admin";
         }
 
-        List<User> customers = customerRepository.getAll();
+        List<User> customers = userRepository.getAll();
         StringBuffer buf = new StringBuffer("[");
         for (User customer:customers){
             buf.append(
@@ -131,20 +125,19 @@ public class AdminProcessImpl implements AdminProcess {
         return buf.toString();
     }
 
-
     public String modifyUser(HttpSession httpSession,
                              String username, int isValid)
     {
         try {
             Object user = httpSession.getAttribute("user");
-            if(user==null || customerRepository.getCustomerByUsername(user.toString()).getIsAdmin()==0){
+            if(user==null || userRepository.getCustomerByUsername(user.toString()).getIsAdmin()==0){
                 return "Not admin";
             }
-            User customer = customerRepository.getCustomerByUsername(username);
+            User customer = userRepository.getCustomerByUsername(username);
             if (customer==null)
                 return "No such user found.";
             customer.setIs_valid(isValid);
-            customerRepository.save(customer);
+            userRepository.save(customer);
             return "Success";
         }
         catch (Exception e){
@@ -152,28 +145,26 @@ public class AdminProcessImpl implements AdminProcess {
         }
     }
 
-
-
     public String modifyUser(HttpSession httpSession)
     {
         try {
             Object user = httpSession.getAttribute("user");
-            if(user==null || customerRepository.getCustomerByUsername(user.toString()).getIsAdmin()==0){
+            if(user==null || userRepository.getCustomerByUsername(user.toString()).getIsAdmin()==0){
                 return "Not admin";
             }
-            List<IndentItems> indentItemsList = indentItemsRepository.getAll();
+            List<HistoryItems> historyItemsList = historyItemsRepository.getAll();
             StringBuffer buf = new StringBuffer("[");
-            for (IndentItems item:indentItemsList){
+            for (HistoryItems item:historyItemsList){
                 Book book = bookRepository.getBookByBookId(item.getBookId());
                 buf.append(
-                        "{\"OrderID\" : \"" + item.getIndentId() +
+                        "{\"OrderID\" : \"" + item.getHistoryId() +
                                 "\", \"Name\" : \"" + book.getBookName() +
                                 "\", \"Username\" : \"" +item.getUsername() +
                                 "\", \"Category\" : \"" +book.getCategory() +
                                 "\", \"Amount\" : \"" + item.getAmount() +
                                 "\", \"Author\" : \"" + book.getAuthor() +
                                 "\", \"Price\" : \"" + item.getAmount() * book.getPrice() +
-                                "\", \"Time\" : \""+ indentRepository.getIndentByIndentId(item.getIndentId()).getCreateTime() +"\"}");
+                                "\", \"Time\" : \""+ historyRepository.getHistoryByHistoryId(item.getHistoryId()).getCreateTime() +"\"}");
                 buf.append(',');
             }
             buf.deleteCharAt(buf.length()-1);
@@ -184,5 +175,4 @@ public class AdminProcessImpl implements AdminProcess {
             return e.toString();
         }
     }
-
 }

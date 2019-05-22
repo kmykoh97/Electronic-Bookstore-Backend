@@ -2,7 +2,6 @@ package SJTU.eBook.Service;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import javax.servlet.http.HttpSession;
 
 public interface UserManagement {
