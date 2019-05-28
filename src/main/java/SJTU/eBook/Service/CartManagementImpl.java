@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,6 +23,9 @@ public class CartManagementImpl implements CartManagement
 
     @Autowired
     OrderRepository orderFormRepository;
+
+    @Autowired
+    BookMongoRepository bookMongoRepository;
 
     public String getBooklist() {
         List<Book> bookList = bookRepository.getAll();
@@ -126,5 +130,43 @@ public class CartManagementImpl implements CartManagement
 
             return "Succeed";
         }
+    }
+
+    public String addComment(int bookID, String comment){
+        BookMongo bookMongo = bookMongoRepository.findByBookID(bookID);
+        if (bookMongo == null){
+            bookMongo = new BookMongo();
+            bookMongo.setBookID(bookID);
+        }
+        List<String> comments =bookMongo.getComments();
+        if (comments==null ||comments.size()==0){
+            comments = new ArrayList<String>();
+        }
+        comments.add(comment);
+        bookMongo.setComments(comments);
+        bookMongoRepository.save(bookMongo);
+        return "Success";
+    }
+
+    public String showComment(int bookID) {
+        BookMongo bookMongo = bookMongoRepository.findByBookID(bookID);
+        if (bookMongo == null) {
+            return "no comments at present.";
+        }
+        List<String> comments = bookMongo.getComments();
+        if (comments == null || comments.size() == 0) {
+            return "no comments at present.";
+        }
+        // build a buf in json format
+        StringBuilder buf = new StringBuilder();
+        buf.append("{\"comment\":[");
+        for (String comment : comments) {
+            buf.append("\"");
+            buf.append(comment);
+            buf.append("\",");
+        }
+        buf.deleteCharAt(buf.length() - 1);
+        buf.append("]}");
+        return buf.toString();
     }
 }

@@ -8,6 +8,7 @@ This is a project to write backend for bookstore application using popular Java 
 - Spring Boot(for back-end bootstraping)
 - Maven(for easier dependency injection)
 - MySql(connection using mysql-connector-8)
+- MongoDB(Implementation of NoSQL to store comments)
 - Hibernate(for automatic database management, JPA implementation and OR mapping)
 - Tomcat 8(act as container for server back-end)
 - Ajax(for reactive data transfer between front-end and back-end. Imported as Jquery)

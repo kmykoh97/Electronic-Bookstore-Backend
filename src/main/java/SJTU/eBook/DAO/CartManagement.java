@@ -18,4 +18,10 @@ public interface CartManagement
     @RequestMapping("/purchase/change_amount")
     String changeAmount(HttpSession httpSession, int order_id, int new_amount);
 
+    @RequestMapping("/purchase/add_comment")
+    String addComment(int bookID, String comment);
+
+    @RequestMapping("/purchase/get_comment")
+    String showComment(int bookID);
+
 }
