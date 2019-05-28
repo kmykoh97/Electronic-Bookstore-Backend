@@ -3,7 +3,8 @@ package SJTU.eBook.DAO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 
-public interface CartManagement {
+public interface CartManagement
+{
 
     @RequestMapping("/getBook")
     String getBooklist();

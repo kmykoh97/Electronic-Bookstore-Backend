@@ -4,7 +4,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="book")
-public class Book {
+public class Book
+{
+
     @Id
     @Column(name = "bookId", nullable = false)
     private int bookId;
@@ -114,4 +116,5 @@ public class Book {
     public void setIsbn(int isbn) {
         this.isbn = isbn;
     }
+
 }

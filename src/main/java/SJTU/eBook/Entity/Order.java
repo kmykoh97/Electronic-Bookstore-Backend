@@ -4,7 +4,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="orderform")
-public class Order {
+public class Order
+{
 
     @Id
     @Column(name = "orderId", nullable = false)
@@ -63,5 +64,6 @@ public class Order {
     public String toString() {
         return super.toString();
     }
+
 }
 

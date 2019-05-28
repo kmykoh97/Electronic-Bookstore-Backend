@@ -4,7 +4,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpSession;
 
-public interface UserManagement {
+public interface UserManagement
+{
 
     @RequestMapping("/login/check_session")
     String checkSession(HttpSession httpSession);
@@ -19,10 +20,9 @@ public interface UserManagement {
     String getInfo(HttpSession httpSession);
 
     @RequestMapping("/profile/update")
-    String updateProfile(HttpSession httpSession, String phone,
-                         String email, String name, String address);
+    String updateProfile(HttpSession httpSession, String phone, String email, String name, String address);
 
     @RequestMapping("/signup/process")
-    String signUp(HttpSession httpSession, String username, String password,
-                  String phone, String email,  String address, String realname);
+    String signUp(HttpSession httpSession, String username, String password, String phone, String email,  String address, String realname);
+
 }

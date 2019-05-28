@@ -10,46 +10,52 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @SpringBootApplication
-public class UserManagementImpl implements UserManagement {
+public class UserManagementImpl implements UserManagement
+{
+
     @Autowired
     UserRepository customerRepository;
 
     public String checkSession(HttpSession httpSession) {
         String message = "No info received";
-        if(httpSession.getAttribute("user")!=null)
+
+        if (httpSession.getAttribute("user") != null) {
             return "Succeed";
-        else {
+        } else {
             return "Failure";
         }
     }
 
-    public void logout(HttpSession httpSession){
+    public void logout(HttpSession httpSession) {
         httpSession.setAttribute("user",null);
     }
 
     public String checkLogin(String usn, String psw, HttpSession httpSession) {
         User customer = customerRepository.getCustomerByUsername(usn);
-        if(customer==null){
+
+        if (customer == null) {
             return "Unknown user";
-        }
-        else if (customer.getPassword().equals(psw)) {
+        } else if (customer.getPassword().equals(psw)) {
             if (customer.getIs_valid() == 0) {
                 return "Blocked user";
             }
+
             httpSession.setAttribute("user", usn);
+
             return "Succeed";
-        }
-        else {
+        } else {
             return "Failure";
         }
     }
 
-    public String getInfo(HttpSession httpSession){
+    public String getInfo(HttpSession httpSession) {
         Object user = httpSession.getAttribute("user");
-        if(user==null)
+
+        if(user == null) {
             return "Not logged in";
-        else {
+        } else {
             User customer = customerRepository.getCustomerByUsername(user.toString());
+
             return(
                     "{\"phone\" : \"" + customer.getPhone() +
                             "\", \"address\" : \"" + customer.getAddress() +
@@ -59,27 +65,35 @@ public class UserManagementImpl implements UserManagement {
         }
     }
 
-    public String updateProfile(HttpSession httpSession, String phone, String email, String name, String address){
+    public String updateProfile(HttpSession httpSession, String phone, String email, String name, String address) {
         Object user = httpSession.getAttribute("user");
-        if(user==null)
+
+        if(user == null) {
             return "Not logged in";
+        }
+
         User customer = customerRepository.getCustomerByUsername(user.toString());
-        if (customer==null)
+
+        if (customer == null) {
             return "Unknown user";
+        }
+
         customer.setAddress(address);
         customer.setEmail(email);
         customer.setName(name);
         customer.setPhone(phone);
         customerRepository.save(customer);
+
         return "Succeed";
     }
 
-    public String signUp(HttpSession httpSession, String username, String password,
-                         String phone, String email,  String address, String realname)
-    {
+    public String signUp(HttpSession httpSession, String username, String password, String phone, String email,  String address, String realname) {
         User customer = customerRepository.getCustomerByUsername(username);
-        if (customer!=null)
+
+        if (customer != null) {
             return "Username used";
+        }
+
         User newCustomer = new User();
         newCustomer.setAddress(address);
         newCustomer.setEmail(email);
@@ -90,6 +104,7 @@ public class UserManagementImpl implements UserManagement {
         newCustomer.setIs_valid(1);
         customerRepository.save(newCustomer);
         httpSession.setAttribute("user", username);
+
         return "Succeed";
     }
 }

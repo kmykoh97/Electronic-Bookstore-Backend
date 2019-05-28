@@ -4,7 +4,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="history")
-public class History {
+public class History
+{
+
     @Id
     @GeneratedValue
     private int historyId;
@@ -41,4 +43,5 @@ public class History {
     public int hashCode() {
         return super.hashCode();
     }
+
 }

@@ -3,12 +3,13 @@ package SJTU.eBook.DAO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 
-public interface HistoryManagement {
+public interface HistoryManagement
+{
 
     @RequestMapping("/purchase/create_indent")
-    String createIndent(HttpSession httpSession);
+    String createHistory(HttpSession httpSession);
 
     @RequestMapping("/fetch_indents")
-    String fetchIndents(HttpSession httpSession, String book_filter,
-                        String author_filter, String time_filter);
+    String fetchHistory(HttpSession httpSession, String book_filter, String author_filter, String time_filter);
+
 }

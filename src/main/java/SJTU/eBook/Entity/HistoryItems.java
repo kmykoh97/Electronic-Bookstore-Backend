@@ -4,7 +4,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="historyitems")
-public class HistoryItems {
+public class HistoryItems
+{
 
     private int bookId;
     private String username;
@@ -69,4 +70,5 @@ public class HistoryItems {
     public boolean equals(Object obj) {
         return super.equals(obj);
     }
+
 }
