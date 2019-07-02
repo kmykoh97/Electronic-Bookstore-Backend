@@ -1,6 +1,6 @@
 package SJTU.eBook.Service;
 
-import SJTU.eBook.DAO.AdminProcess;
+import SJTU.eBook.Controller.AdminProcess;
 import SJTU.eBook.Entity.*;
 import SJTU.eBook.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;

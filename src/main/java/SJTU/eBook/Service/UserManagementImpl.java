@@ -1,6 +1,6 @@
 package SJTU.eBook.Service;
 
-import SJTU.eBook.DAO.UserManagement;
+import SJTU.eBook.Controller.UserManagement;
 import SJTU.eBook.Entity.*;
 import SJTU.eBook.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

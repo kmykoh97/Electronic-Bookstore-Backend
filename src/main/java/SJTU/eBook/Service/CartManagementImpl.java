@@ -1,6 +1,6 @@
 package SJTU.eBook.Service;
 
-import SJTU.eBook.DAO.CartManagement;
+import SJTU.eBook.Controller.CartManagement;
 import SJTU.eBook.Entity.*;
 import SJTU.eBook.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -132,31 +132,39 @@ public class CartManagementImpl implements CartManagement
         }
     }
 
-    public String addComment(int bookID, String comment){
+    public String addComment(int bookID, String comment) {
         BookMongo bookMongo = bookMongoRepository.findByBookID(bookID);
-        if (bookMongo == null){
+
+        if (bookMongo == null) {
             bookMongo = new BookMongo();
             bookMongo.setBookID(bookID);
         }
-        List<String> comments =bookMongo.getComments();
-        if (comments==null ||comments.size()==0){
+
+        List<String> comments = bookMongo.getComments();
+
+        if (comments == null ||comments.size() == 0) {
             comments = new ArrayList<String>();
         }
+
         comments.add(comment);
         bookMongo.setComments(comments);
         bookMongoRepository.save(bookMongo);
+
         return "Success";
     }
 
     public String showComment(int bookID) {
         BookMongo bookMongo = bookMongoRepository.findByBookID(bookID);
         if (bookMongo == null) {
-            return "no comments at present.";
+            return "none"; // no comment currently
         }
+
         List<String> comments = bookMongo.getComments();
+
         if (comments == null || comments.size() == 0) {
-            return "no comments at present.";
+            return "none"; // no comment currently
         }
+
         // build a buf in json format
         StringBuilder buf = new StringBuilder();
         buf.append("{\"comment\":[");
@@ -167,6 +175,7 @@ public class CartManagementImpl implements CartManagement
         }
         buf.deleteCharAt(buf.length() - 1);
         buf.append("]}");
+
         return buf.toString();
     }
 }

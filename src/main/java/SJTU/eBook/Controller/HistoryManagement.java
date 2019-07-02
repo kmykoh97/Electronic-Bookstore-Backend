@@ -1,4 +1,4 @@
-package SJTU.eBook.DAO;
+package SJTU.eBook.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
