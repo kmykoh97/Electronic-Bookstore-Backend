@@ -23,7 +23,11 @@ Front-end souce code can be found [here](https://github.com/kmykoh97/Electronic-
 
 ## Run
 
-visit: http://localhost:8080/ after the application run
+Two ways to open project:  
+- IDE: Import the project and run in Intellij IDEA  
+- Command Line: `mvn spring-boot:run`  
+
+visit: http://localhost:8080/ after the application run(remember to import front-end build files if there are any front-end changes)
 
 ## Feature Request
 
